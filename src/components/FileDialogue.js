@@ -1,9 +1,9 @@
 import React from "react";
+import srtParser2 from "srt-parser-2";
 
 function buildFileSelector(){
   const fileSelector = document.createElement('input');
   fileSelector.setAttribute('type', 'file');
-  fileSelector.setAttribute('multiple', 'multiple');
   fileSelector.onchange = processFile;
   return fileSelector;
 }
@@ -13,8 +13,9 @@ function processFile(e) {
     var reader = new FileReader();
     reader.readAsText(file, "UTF-8");
     reader.onload = function (evt) {
-        // TODO: update to process as SRT files
-        document.getElementById("fileContents").innerHTML = evt.target.result;
+        var parser = new srtParser2()
+        var result = parser.fromSrt(evt.target.result);
+        console.log(result);
     }
     reader.onerror = function () {
         document.getElementById("fileContents").innerHTML = "error reading file";
@@ -35,7 +36,7 @@ export default class FileDialogue extends React.Component {
   render(){
     return (
       <>
-        <button onClick={this.handleFileSelect}>Select files</button>
+        <button onClick={this.handleFileSelect}>Select SRT file</button>
         <div id="fileContents"></div>
       </>
     )
