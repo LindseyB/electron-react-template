@@ -21,10 +21,13 @@ Runs the app as an electron app and opens up debug mode.
 The app will reload if you make edits.\
 You will also see any lint errors in the console.
 
-### `npm test`
+### `npm run lint`
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Runs ESLint and outputs errors.
+
+### `npm run lint:fix`
+
+Runs ESLint and attempts to fix errors it can automatically.
 
 ### `npm run build`
 

@@ -46,7 +46,7 @@ export default class FileDialogue extends React.Component {
 
   renderSubtitles() {
     return (
-      this.state.subtitles.map(sub => <SrtEntry subtitle={sub.text} id={sub.id}/>)
+      this.state.subtitles.map(sub => <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id}/>)
     )
   }
 

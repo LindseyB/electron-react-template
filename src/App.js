@@ -1,3 +1,4 @@
+import React from "react"
 import FileDialogue from "./components/FileDialogue";
 import './App.css';
 
