@@ -29,6 +29,14 @@ Runs ESLint and outputs errors.
 
 Runs ESLint and attempts to fix errors it can automatically.
 
+### `npm run format`
+
+Runs prettier to check files.
+
+### `npm run format:fix`
+
+Runs prettier to check and automatically format files.
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\

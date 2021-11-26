@@ -1,14 +1,14 @@
-import React from "react"
-import srtParser2 from "srt-parser-2"
+import React from 'react'
+import srtParser2 from 'srt-parser-2'
 
-import SrtEntry from "./SrtEntry"
+import SrtEntry from './SrtEntry'
 
 export default class FileDialogue extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       subtitles: [],
-      subtitlesLoaded: false
+      subtitlesLoaded: false,
     }
   }
 
@@ -20,22 +20,22 @@ export default class FileDialogue extends React.Component {
   }
 
   processFile = (e) => {
-    Array.from(e.target.files).forEach(file => {
+    Array.from(e.target.files).forEach((file) => {
       var reader = new FileReader()
-      reader.readAsText(file, "UTF-8")
+      reader.readAsText(file, 'UTF-8')
       reader.onload = (evt) => {
-          var parser = new srtParser2()
-          var result = parser.fromSrt(evt.target.result)
-          console.log(result)
-          this.setState({subtitles: result, subtitlesLoaded: true})
+        var parser = new srtParser2()
+        var result = parser.fromSrt(evt.target.result)
+        console.log(result)
+        this.setState({ subtitles: result, subtitlesLoaded: true })
       }
       reader.onerror = function () {
-          document.getElementById("fileContents").innerHTML = "error reading file"
+        document.getElementById('fileContents').innerHTML = 'error reading file'
       }
     })
   }
 
-  componentDidMount(){
+  componentDidMount() {
     this.fileSelector = this.buildFileSelector()
   }
 
@@ -45,13 +45,13 @@ export default class FileDialogue extends React.Component {
   }
 
   renderSubtitles() {
-    return (
-      this.state.subtitles.map(sub => <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id}/>)
-    )
+    return this.state.subtitles.map((sub) => (
+      <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} />
+    ))
   }
 
   renderFileSelect() {
-    return(
+    return (
       <>
         <button onClick={this.handleFileSelect}>Select SRT file</button>
         <div id="fileContents"></div>
@@ -59,8 +59,8 @@ export default class FileDialogue extends React.Component {
     )
   }
 
-  render(){
-    if(this.state.subtitlesLoaded) {
+  render() {
+    if (this.state.subtitlesLoaded) {
       return this.renderSubtitles()
     }
 

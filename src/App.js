@@ -1,6 +1,6 @@
-import React from "react"
-import FileDialogue from "./components/FileDialogue";
-import './App.css';
+import React from 'react'
+import FileDialogue from './components/FileDialogue'
+import './App.css'
 
 function App() {
   return (
@@ -11,4 +11,4 @@ function App() {
   )
 }
 
-export default App;
+export default App
