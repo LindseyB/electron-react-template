@@ -1,11 +1,8 @@
 name: Lint the source 🧹
-on:
-  pull_request:
-    branches:
-      - main
+on: [push, pull_request]
 jobs:
   test:
-    name: Lint
+    name: Lint 🧹
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
