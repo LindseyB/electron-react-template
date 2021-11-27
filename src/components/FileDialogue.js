@@ -69,14 +69,13 @@ export default class FileDialogue extends React.Component {
         <Search onChange={this.filterSubtitles} />
         <div id="subtitles-container">
           {this.state.subtitles.map((sub, index) =>
-            !this.state.filter ||
-            sub.text.toLowerCase().includes(this.state.filter) ||
-            sub.checked ? (
+            !sub.hidden ? (
               <SrtEntry
                 subtitle={sub.text}
                 index={index}
                 key={sub.id}
                 onChange={this.onSubtitleChange}
+                checked={sub.checked}
               />
             ) : (
               ''
@@ -118,19 +117,30 @@ export default class FileDialogue extends React.Component {
   setAll = (status) => {
     let subtitles = this.state.subtitles
 
-    for (const item of document.querySelectorAll('[data-subtitle-index]')) {
-      item.checked = status
-    }
-
     for (const sub of subtitles) {
-      sub['checked'] = status
+      if(!sub.hidden) {
+        sub['checked'] = status
+      }
     }
 
     this.setState({ subtitles: subtitles })
   }
 
   filterSubtitles = (e) => {
-    this.setState({ filter: e.target.value.toLowerCase() })
+    let subtitles = this.state.subtitles
+    let filter = e.target.value.toLowerCase()
+
+    let filteredIds = subtitles.filter(sub => !sub.text.toLowerCase().includes(filter) && !sub.checked).map(sub => sub.id)
+
+    for (const sub of subtitles) {
+      if(filteredIds.includes(sub.id)) {
+        sub.hidden = true
+      } else {
+        sub.hidden = false
+      }
+    }
+
+    this.setState({ subtitles: subtitles })
   }
 
   onSubtitleChange = (e) => {

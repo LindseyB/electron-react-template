@@ -14,6 +14,7 @@ export default class SrtEntry extends React.Component {
               className="subtitle-check"
               data-subtitle-index={this.props.index}
               onChange={this.props.onChange}
+              checked={this.props.checked}
             >
               {this.props.subtitle}
             </Form.Checkbox>
@@ -24,8 +25,13 @@ export default class SrtEntry extends React.Component {
   }
 }
 
+SrtEntry.defaultProps = {
+  checked: false
+}
+
 SrtEntry.propTypes = {
   subtitle: PropTypes.string,
   onChange: PropTypes.func,
   index: PropTypes.number,
+  checked: PropTypes.bool
 }
