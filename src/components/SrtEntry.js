@@ -5,6 +5,12 @@ import { Form, Panel } from 'react-bulma-components'
 import 'bulma/css/bulma.min.css'
 
 export default class SrtEntry extends React.Component {
+  // Don't normally do this but the HTML in SRT files
+  // is simple enough that this works, try a sanitizer
+  removeHtml(text) {
+    return text.replace(/<[^>]*>?/gm, '')
+  }
+
   render() {
     return (
       <Panel.Block renderAs="label">
@@ -16,7 +22,7 @@ export default class SrtEntry extends React.Component {
               onChange={this.props.onChange}
               checked={this.props.checked}
             >
-              {this.props.subtitle}
+              {this.removeHtml(this.props.subtitle)}
             </Form.Checkbox>
           </Form.Control>
         </Form.Field>
