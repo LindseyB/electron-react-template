@@ -1,7 +1,9 @@
 import React from 'react'
 import srtParser2 from 'srt-parser-2'
-
 import SrtEntry from './SrtEntry'
+import { Button, Message } from 'react-bulma-components';
+
+import 'bulma/css/bulma.min.css'
 
 export default class FileDialogue extends React.Component {
   constructor(props) {
@@ -9,6 +11,7 @@ export default class FileDialogue extends React.Component {
     this.state = {
       subtitles: [],
       subtitlesLoaded: false,
+      error: null
     }
   }
 
@@ -20,22 +23,30 @@ export default class FileDialogue extends React.Component {
   }
 
   processFile = (e) => {
+    console.log("processing...")
     Array.from(e.target.files).forEach((file) => {
       var reader = new FileReader()
       reader.readAsText(file, 'UTF-8')
       reader.onload = (evt) => {
         var parser = new srtParser2()
         var result = parser.fromSrt(evt.target.result)
-        console.log(result)
-        this.setState({ subtitles: result, subtitlesLoaded: true })
+        if (result.length == 0) {
+          this.setState({error: "Couldn't find any subtitles in that file, are you sure it was a subtitle file?"})
+        } else {
+          this.setState({ subtitles: result, subtitlesLoaded: true })
+        }
       }
       reader.onerror = function () {
-        document.getElementById('fileContents').innerHTML = 'error reading file'
+        this.setState({error: "Error reading file, are you sure it's an SRT?"})
       }
     })
   }
 
   componentDidMount() {
+    this.fileSelector = this.buildFileSelector()
+  }
+
+  componentDidUpdate() {
     this.fileSelector = this.buildFileSelector()
   }
 
@@ -53,15 +64,38 @@ export default class FileDialogue extends React.Component {
   renderFileSelect() {
     return (
       <>
-        <button onClick={this.handleFileSelect}>Select SRT file</button>
-        <div id="fileContents"></div>
+        <Button onClick={this.handleFileSelect}>Select SRT file</Button>
       </>
+    )
+  }
+
+  clearErrors = () => {
+    this.setState({error: null})
+  }
+
+  renderError = () => {
+    return (
+      <Message color="danger" m={6}>
+        <Message.Header>
+          <span>
+            Error
+          </span>
+          <Button remove onClick={this.clearErrors}/>
+        </Message.Header>
+        <Message.Body>
+          {this.state.error}
+        </Message.Body>
+      </Message>
     )
   }
 
   render() {
     if (this.state.subtitlesLoaded) {
       return this.renderSubtitles()
+    }
+
+    if (this.state.error) {
+      return this.renderError()
     }
 
     return this.renderFileSelect()

@@ -1,13 +1,21 @@
 import React from 'react'
 import FileDialogue from './components/FileDialogue'
-import './App.css'
+import { Columns, Container, Heading } from 'react-bulma-components';
+
+import './styles/App.scss'
+import 'bulma/css/bulma.min.css'
+
 
 function App() {
   return (
-    <div className="App">
-      <h1>Sturdy Engine</h1>
-      <FileDialogue />
-    </div>
+    <Container>
+      <Columns>
+        <Columns.Column p={4} m={4}>
+          <Heading>Sturdy Engine</Heading>
+          <FileDialogue />
+        </Columns.Column>
+      </Columns>
+    </Container>
   )
 }
 
