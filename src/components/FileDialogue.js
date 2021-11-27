@@ -24,7 +24,6 @@ export default class FileDialogue extends React.Component {
   }
 
   processFile = (e) => {
-    console.log('processing...')
     Array.from(e.target.files).forEach((file) => {
       var reader = new FileReader()
       reader.readAsText(file, 'UTF-8')
@@ -67,7 +66,7 @@ export default class FileDialogue extends React.Component {
         </Panel.Header>
         <div id="subtitles-container">
           {this.state.subtitles.map((sub) => (
-            <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} checked={sub.checked} />
+            <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} />
           ))}
         </div>
         <Panel.Block>
@@ -101,8 +100,16 @@ export default class FileDialogue extends React.Component {
     this.setState({ error: null, subtitles: [], subtitlesLoaded: false })
   }
 
+  // This is decidedly not the react way to do this
   setAll = (status) => {
-    let newSubs = this.state.subtitles.map((sub) => ({ ...sub, checked: status }))
+    for (let item of document.getElementsByClassName('checkbox')) {
+      item.checked = status
+    }
+  }
+
+  toggleSubtitle = (index) => {
+    let newSubs = this.state.subtitles
+    newSubs[index] = { ...newSubs[index], checked: !!newSubs[index]['checked'] }
 
     this.setState({ subtitles: newSubs })
   }
