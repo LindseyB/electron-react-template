@@ -4,6 +4,7 @@ import { Button, Message, Panel } from 'react-bulma-components'
 
 import SrtEntry from './SrtEntry'
 import Search from './Search'
+import VideoFileDialogue from './VideoFileDialogue'
 
 import 'bulma/css/bulma.min.css'
 import '../styles/SrtFileDialogue.scss'
@@ -15,7 +16,16 @@ export default class SrtFileDialogue extends React.Component {
       subtitles: [],
       subtitlesLoaded: false,
       error: null,
+      videoFileName: null,
     }
+  }
+
+  componentDidMount() {
+    this.fileSelector = this.buildFileSelector()
+  }
+
+  componentDidUpdate() {
+    this.fileSelector = this.buildFileSelector()
   }
 
   buildFileSelector = () => {
@@ -46,63 +56,9 @@ export default class SrtFileDialogue extends React.Component {
     })
   }
 
-  componentDidMount() {
-    this.fileSelector = this.buildFileSelector()
-  }
-
-  componentDidUpdate() {
-    this.fileSelector = this.buildFileSelector()
-  }
-
   handleFileSelect = (e) => {
     e.preventDefault()
     this.fileSelector.click()
-  }
-
-  renderSubtitles() {
-    return (
-      <Panel>
-        <Panel.Header display="flex" justifyContent="space-between">
-          Subtitles
-          <Button remove onClick={this.clearSubtitles} />
-        </Panel.Header>
-        <Search onChange={this.filterSubtitles} />
-        <div id="subtitles-container">
-          {this.state.subtitles.map((sub, index) =>
-            !sub.hidden ? (
-              <SrtEntry
-                subtitle={sub.text}
-                index={index}
-                key={sub.id}
-                onChange={this.onSubtitleChange}
-                checked={sub.checked}
-              />
-            ) : (
-              ''
-            ),
-          )}
-        </div>
-        <Panel.Block>
-          <Button.Group hasAddons m="auto">
-            <Button outlined onClick={() => this.setAll(false)}>
-              Uncheck All
-            </Button>
-            <Button outlined onClick={() => this.setAll(true)}>
-              Check All
-            </Button>
-            <Button outlined>Process All</Button>
-          </Button.Group>
-        </Panel.Block>
-      </Panel>
-    )
-  }
-
-  renderFileSelect() {
-    return (
-      <>
-        <Button onClick={this.handleFileSelect}>Select SRT file</Button>
-      </>
-    )
   }
 
   clearErrors = () => {
@@ -151,6 +107,58 @@ export default class SrtFileDialogue extends React.Component {
 
     subtitles[index].checked = !subtitles[index].checked
     this.setState({ subtitles: subtitles })
+  }
+
+  setVideoFileName = (fileName) => {
+    this.setState({ videoFileName: fileName })
+  }
+
+  // RENDER
+  renderSubtitles() {
+    return (
+      <Panel>
+        <Panel.Header display="flex" justifyContent="space-between">
+          Subtitles
+          <Button remove onClick={this.clearSubtitles} />
+        </Panel.Header>
+        <Search onChange={this.filterSubtitles} />
+        <VideoFileDialogue onFileSelect={this.setVideoFileName} />
+        <div id="subtitles-container">
+          {this.state.subtitles.map((sub, index) =>
+            !sub.hidden ? (
+              <SrtEntry
+                subtitle={sub.text}
+                index={index}
+                key={sub.id}
+                onChange={this.onSubtitleChange}
+                checked={sub.checked}
+              />
+            ) : (
+              ''
+            ),
+          )}
+        </div>
+        <Panel.Block>
+          <Button.Group hasAddons m="auto">
+            <Button outlined onClick={() => this.setAll(false)}>
+              Uncheck All
+            </Button>
+            <Button outlined onClick={() => this.setAll(true)}>
+              Check All
+            </Button>
+            <Button outlined>Process All</Button>
+          </Button.Group>
+        </Panel.Block>
+      </Panel>
+    )
+  }
+
+  renderFileSelect() {
+    return (
+      <>
+        <Button onClick={this.handleFileSelect}>Select SRT file</Button>
+      </>
+    )
   }
 
   renderError = () => {
