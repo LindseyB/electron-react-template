@@ -10,7 +10,11 @@ export default class SrtEntry extends React.Component {
       <Panel.Block renderAs="label">
         <Form.Field>
           <Form.Control>
-            <Form.Checkbox className="subtitle-check" data-subtitle-index={this.props.id}>
+            <Form.Checkbox
+              className="subtitle-check"
+              data-subtitle-index={this.props.index}
+              onChange={this.props.onChange}
+            >
               {this.props.subtitle}
             </Form.Checkbox>
           </Form.Control>
@@ -22,5 +26,6 @@ export default class SrtEntry extends React.Component {
 
 SrtEntry.propTypes = {
   subtitle: PropTypes.string,
-  id: PropTypes.string,
+  onChange: PropTypes.func,
+  index: PropTypes.number,
 }

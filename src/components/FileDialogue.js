@@ -68,9 +68,16 @@ export default class FileDialogue extends React.Component {
         </Panel.Header>
         <Search onChange={this.filterSubtitles} />
         <div id="subtitles-container">
-          {this.state.subtitles.map((sub) =>
-            !this.state.filter || sub.text.includes(this.state.filter) ? (
-              <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} />
+          {this.state.subtitles.map((sub, index) =>
+            !this.state.filter ||
+            sub.text.toLowerCase().includes(this.state.filter) ||
+            sub.checked ? (
+              <SrtEntry
+                subtitle={sub.text}
+                index={index}
+                key={sub.id}
+                onChange={this.onSubtitleChange}
+              />
             ) : (
               ''
             ),
@@ -109,13 +116,29 @@ export default class FileDialogue extends React.Component {
 
   // This is decidedly not the react way to do this
   setAll = (status) => {
-    for (let item of document.querySelectorAll('[data-subtitle-index]')) {
+    let subtitles = this.state.subtitles
+
+    for (const item of document.querySelectorAll('[data-subtitle-index]')) {
       item.checked = status
     }
+
+    for (const sub of subtitles) {
+      sub['checked'] = status
+    }
+
+    this.setState({ subtitles: subtitles })
   }
 
   filterSubtitles = (e) => {
-    this.setState({ filter: e.target.value })
+    this.setState({ filter: e.target.value.toLowerCase() })
+  }
+
+  onSubtitleChange = (e) => {
+    let subtitles = this.state.subtitles
+    let index = parseInt(e.target.dataset.subtitleIndex)
+
+    subtitles[index].checked = !subtitles[index].checked
+    this.setState({ subtitles: subtitles })
   }
 
   renderError = () => {
