@@ -6,9 +6,9 @@ import SrtEntry from './SrtEntry'
 import Search from './Search'
 
 import 'bulma/css/bulma.min.css'
-import '../styles/FileDialogue.scss'
+import '../styles/SrtFileDialogue.scss'
 
-export default class FileDialogue extends React.Component {
+export default class SrtFileDialogue extends React.Component {
   constructor(props) {
     super(props)
     this.state = {

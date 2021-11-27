@@ -1,5 +1,5 @@
 import React from 'react'
-import FileDialogue from './components/FileDialogue'
+import SrtFileDialogue from './components/SrtFileDialogue'
 import { Columns, Container, Heading } from 'react-bulma-components'
 
 import './styles/App.scss'
@@ -11,7 +11,7 @@ function App() {
       <Columns>
         <Columns.Column p={4} m={4}>
           <Heading>Sturdy Engine</Heading>
-          <FileDialogue />
+          <SrtFileDialogue />
         </Columns.Column>
       </Columns>
     </Container>
