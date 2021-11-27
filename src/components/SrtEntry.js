@@ -26,12 +26,12 @@ export default class SrtEntry extends React.Component {
 }
 
 SrtEntry.defaultProps = {
-  checked: false
+  checked: false,
 }
 
 SrtEntry.propTypes = {
   subtitle: PropTypes.string,
   onChange: PropTypes.func,
   index: PropTypes.number,
-  checked: PropTypes.bool
+  checked: PropTypes.bool,
 }

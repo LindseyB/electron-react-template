@@ -118,7 +118,7 @@ export default class FileDialogue extends React.Component {
     let subtitles = this.state.subtitles
 
     for (const sub of subtitles) {
-      if(!sub.hidden) {
+      if (!sub.hidden) {
         sub['checked'] = status
       }
     }
@@ -130,10 +130,12 @@ export default class FileDialogue extends React.Component {
     let subtitles = this.state.subtitles
     let filter = e.target.value.toLowerCase()
 
-    let filteredIds = subtitles.filter(sub => !sub.text.toLowerCase().includes(filter) && !sub.checked).map(sub => sub.id)
+    let filteredIds = subtitles
+      .filter((sub) => !sub.text.toLowerCase().includes(filter) && !sub.checked)
+      .map((sub) => sub.id)
 
     for (const sub of subtitles) {
-      if(filteredIds.includes(sub.id)) {
+      if (filteredIds.includes(sub.id)) {
         sub.hidden = true
       } else {
         sub.hidden = false
