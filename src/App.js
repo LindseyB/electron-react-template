@@ -1,10 +1,9 @@
 import React from 'react'
 import FileDialogue from './components/FileDialogue'
-import { Columns, Container, Heading } from 'react-bulma-components';
+import { Columns, Container, Heading } from 'react-bulma-components'
 
 import './styles/App.scss'
 import 'bulma/css/bulma.min.css'
-
 
 function App() {
   return (

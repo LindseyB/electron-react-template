@@ -1,9 +1,10 @@
 import React from 'react'
 import srtParser2 from 'srt-parser-2'
 import SrtEntry from './SrtEntry'
-import { Button, Message } from 'react-bulma-components';
+import { Button, Message, Panel } from 'react-bulma-components'
 
 import 'bulma/css/bulma.min.css'
+import '../styles/FileDialogue.scss'
 
 export default class FileDialogue extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ export default class FileDialogue extends React.Component {
     this.state = {
       subtitles: [],
       subtitlesLoaded: false,
-      error: null
+      error: null,
     }
   }
 
@@ -23,7 +24,7 @@ export default class FileDialogue extends React.Component {
   }
 
   processFile = (e) => {
-    console.log("processing...")
+    console.log('processing...')
     Array.from(e.target.files).forEach((file) => {
       var reader = new FileReader()
       reader.readAsText(file, 'UTF-8')
@@ -31,13 +32,15 @@ export default class FileDialogue extends React.Component {
         var parser = new srtParser2()
         var result = parser.fromSrt(evt.target.result)
         if (result.length == 0) {
-          this.setState({error: "Couldn't find any subtitles in that file, are you sure it was a subtitle file?"})
+          this.setState({
+            error: "Couldn't find any subtitles in that file, are you sure it was a subtitle file?",
+          })
         } else {
           this.setState({ subtitles: result, subtitlesLoaded: true })
         }
       }
       reader.onerror = function () {
-        this.setState({error: "Error reading file, are you sure it's an SRT?"})
+        this.setState({ error: "Error reading file, are you sure it's an SRT?" })
       }
     })
   }
@@ -56,9 +59,30 @@ export default class FileDialogue extends React.Component {
   }
 
   renderSubtitles() {
-    return this.state.subtitles.map((sub) => (
-      <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} />
-    ))
+    return (
+      <Panel>
+        <Panel.Header display="flex" justifyContent="space-between">
+          Subtitles
+          <Button remove onClick={this.clearSubtitles} />
+        </Panel.Header>
+        <div id="subtitles-container">
+          {this.state.subtitles.map((sub) => (
+            <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} checked={sub.checked} />
+          ))}
+        </div>
+        <Panel.Block>
+          <Button.Group hasAddons m="auto">
+            <Button outlined onClick={() => this.setAll(false)}>
+              Uncheck All
+            </Button>
+            <Button outlined onClick={() => this.setAll(true)}>
+              Check All
+            </Button>
+            <Button outlined>Process All</Button>
+          </Button.Group>
+        </Panel.Block>
+      </Panel>
+    )
   }
 
   renderFileSelect() {
@@ -70,21 +94,27 @@ export default class FileDialogue extends React.Component {
   }
 
   clearErrors = () => {
-    this.setState({error: null})
+    this.setState({ error: null })
+  }
+
+  clearSubtitles = () => {
+    this.setState({ error: null, subtitles: [], subtitlesLoaded: false })
+  }
+
+  setAll = (status) => {
+    let newSubs = this.state.subtitles.map((sub) => ({ ...sub, checked: status }))
+
+    this.setState({ subtitles: newSubs })
   }
 
   renderError = () => {
     return (
       <Message color="danger" m={6}>
         <Message.Header>
-          <span>
-            Error
-          </span>
-          <Button remove onClick={this.clearErrors}/>
+          <span>Error</span>
+          <Button remove onClick={this.clearErrors} />
         </Message.Header>
-        <Message.Body>
-          {this.state.error}
-        </Message.Body>
+        <Message.Body>{this.state.error}</Message.Body>
       </Message>
     )
   }
