@@ -10,7 +10,7 @@ export default class SrtEntry extends React.Component {
       <Panel.Block renderAs="label">
         <Form.Field>
           <Form.Control>
-            <Form.Checkbox class="checkbox" data-subtitle-index={this.props.id}>
+            <Form.Checkbox className="subtitle-check" data-subtitle-index={this.props.id}>
               {this.props.subtitle}
             </Form.Checkbox>
           </Form.Control>

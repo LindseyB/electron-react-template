@@ -1,7 +1,9 @@
 import React from 'react'
 import srtParser2 from 'srt-parser-2'
-import SrtEntry from './SrtEntry'
 import { Button, Message, Panel } from 'react-bulma-components'
+
+import SrtEntry from './SrtEntry'
+import Search from './Search'
 
 import 'bulma/css/bulma.min.css'
 import '../styles/FileDialogue.scss'
@@ -64,10 +66,15 @@ export default class FileDialogue extends React.Component {
           Subtitles
           <Button remove onClick={this.clearSubtitles} />
         </Panel.Header>
+        <Search onChange={this.filterSubtitles} />
         <div id="subtitles-container">
-          {this.state.subtitles.map((sub) => (
-            <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} />
-          ))}
+          {this.state.subtitles.map((sub) =>
+            !this.state.filter || sub.text.includes(this.state.filter) ? (
+              <SrtEntry subtitle={sub.text} id={sub.id} key={sub.id} />
+            ) : (
+              ''
+            ),
+          )}
         </div>
         <Panel.Block>
           <Button.Group hasAddons m="auto">
@@ -102,16 +109,13 @@ export default class FileDialogue extends React.Component {
 
   // This is decidedly not the react way to do this
   setAll = (status) => {
-    for (let item of document.getElementsByClassName('checkbox')) {
+    for (let item of document.querySelectorAll('[data-subtitle-index]')) {
       item.checked = status
     }
   }
 
-  toggleSubtitle = (index) => {
-    let newSubs = this.state.subtitles
-    newSubs[index] = { ...newSubs[index], checked: !!newSubs[index]['checked'] }
-
-    this.setState({ subtitles: newSubs })
+  filterSubtitles = (e) => {
+    this.setState({ filter: e.target.value })
   }
 
   renderError = () => {
