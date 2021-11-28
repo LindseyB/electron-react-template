@@ -1,6 +1,6 @@
 # Sturdy Engine
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app) and uses [React Bulma Components](https://react-bulma.dev/en/storybook)
 
 ## Available Scripts
 
