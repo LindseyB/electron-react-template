@@ -52,12 +52,10 @@ export default class VideoFileDialogue extends React.Component {
 
     return (
       <Panel.Block>
-        <Icon.Text>
-          <Icon color="info" size="medium">
-            <FontAwesomeIcon icon={faFileVideo} />
-          </Icon>
-          {this.state.fileName}
-        </Icon.Text>
+        <Icon color="info" size="medium">
+          <FontAwesomeIcon icon={faFileVideo} />
+        </Icon>
+        {this.state.fileName}
       </Panel.Block>
     )
   }

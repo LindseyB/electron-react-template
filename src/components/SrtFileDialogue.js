@@ -146,7 +146,9 @@ export default class SrtFileDialogue extends React.Component {
             <Button outlined onClick={() => this.setAll(true)}>
               Check All
             </Button>
-            <Button outlined>Process All</Button>
+            <Button outlined disabled={this.state.videoFileName === null}>
+              Process All
+            </Button>
           </Button.Group>
         </Panel.Block>
       </Panel>
