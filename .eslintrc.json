@@ -14,5 +14,10 @@
   },
   "plugins": ["react"],
   "rules": {},
-  "parser": "./node_modules/babel-eslint"
+  "parser": "./node_modules/babel-eslint",
+  "settings": {
+    "react": {
+      "version": "latest"
+    }
+  }
 }
