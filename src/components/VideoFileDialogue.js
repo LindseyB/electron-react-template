@@ -16,6 +16,10 @@ export default class VideoFileDialogue extends React.Component {
 
   componentDidMount() {
     this.fileSelector = this.buildFileSelector()
+
+    console.log('here')
+    const event = new Event('generate')
+    window.dispatchEvent(event)
   }
 
   buildFileSelector = () => {
