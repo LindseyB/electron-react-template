@@ -10,6 +10,11 @@ window.addEventListener('generate', (e) => {
 
   //if (!fs.existsSync('gif')) fs.mkdir('temp')
 
+  /* How to generate and use a palette for ffmpeg
+$ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -filter_complex "[0:v] palettegen" palette.png
+$ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -i palette.png -filter_complex "[0:v][1:v] paletteuse" prettyStickAround.gif
+*/
+
   for (const sub of subtitles) {
     let startTime = sub.startTime.replace(',', '.')
     let endTime = sub.endTime.replace(',', '.')
