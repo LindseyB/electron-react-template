@@ -56,6 +56,15 @@ export default class SrtFileDialogue extends React.Component {
     })
   }
 
+  processSubtitles = () => {
+    const details = {
+      subtitles: this.state.subtitles.filter((sub) => sub.checked),
+      videoFileName: this.state.videoFileName,
+    }
+    const event = new CustomEvent('generate', { detail: details })
+    window.dispatchEvent(event)
+  }
+
   handleFileSelect = (e) => {
     e.preventDefault()
     this.fileSelector.click()
@@ -146,7 +155,11 @@ export default class SrtFileDialogue extends React.Component {
             <Button outlined onClick={() => this.setAll(true)}>
               Check All
             </Button>
-            <Button outlined disabled={this.state.videoFileName === null}>
+            <Button
+              outlined
+              onClick={() => this.processSubtitles()}
+              disabled={this.state.videoFileName === null}
+            >
               Process All
             </Button>
           </Button.Group>
