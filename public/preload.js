@@ -58,7 +58,7 @@ function generateGif(ffmpeg, startTime, durationTime, videoFile, fileName) {
       console.log(`stdout: ${stdout}`)
     },
   )
-} 
+}
 
 function getDurationString(startTime, endTime) {
   let startDate = new Date(`September 18, 1990 ${startTime}`)
