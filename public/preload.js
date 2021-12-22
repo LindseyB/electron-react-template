@@ -20,26 +20,45 @@ $ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -i palette.png -filter_complex "[0:v
     let endTime = sub.endTime.replace(',', '.')
     let durationTime = getDurationString(startTime, endTime)
 
-    console.log(`start: ${startTime} duration: ${durationTime}`)
     let fileName = 'test'
-    exec(
-      `${ffmpeg} -ss ${startTime} -t ${durationTime} -i ${videoFile} -f gif ${fileName}.gif`,
-      (error, stdout, stderr) => {
-        if (error) {
-          console.log(`error: ${error.message}`)
-          return
-        }
-        if (stderr) {
-          console.log(`stderr: ${stderr}`)
-          return
-        }
-        console.log(`stdout: ${stdout}`)
-      },
-    )
+    generatePalette(ffmpeg, startTime, durationTime, videoFile)
+    generateGif(ffmpeg, startTime, durationTime, videoFile, fileName)
   }
-
-  console.log('path to ffmpeg', pathToFfmpeg)
 })
+
+function generatePalette(ffmpeg, startTime, durationTime, videoFile) {
+  exec(
+    `${ffmpeg} -ss ${startTime} -t ${durationTime} -i ${videoFile} -filter_complex "[0:v] palettegen" palette.png`,
+    (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`)
+        return
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`)
+        return
+      }
+      console.log(`stdout: ${stdout}`)
+    },
+  )
+}
+
+function generateGif(ffmpeg, startTime, durationTime, videoFile, fileName) {
+  exec(
+    `${ffmpeg} -ss ${startTime} -t ${durationTime} -i ${videoFile} -i palette.png -filter_complex "[0:v][1:v] paletteuse" ${fileName}.gif`,
+    (error, stdout, stderr) => {
+      if (error) {
+        console.log(`error: ${error.message}`)
+        return
+      }
+      if (stderr) {
+        console.log(`stderr: ${stderr}`)
+        return
+      }
+      console.log(`stdout: ${stdout}`)
+    },
+  )
+} 
 
 function getDurationString(startTime, endTime) {
   let startDate = new Date(`September 18, 1990 ${startTime}`)
