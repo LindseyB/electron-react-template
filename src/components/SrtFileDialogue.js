@@ -8,6 +8,7 @@ import VideoFileDialogue from './VideoFileDialogue'
 
 import 'bulma/css/bulma.min.css'
 import '../styles/SrtFileDialogue.scss'
+import ProgressBar from './ProgressBar'
 
 export default class SrtFileDialogue extends React.Component {
   constructor(props) {
@@ -17,6 +18,8 @@ export default class SrtFileDialogue extends React.Component {
       subtitlesLoaded: false,
       error: null,
       videoFileName: null,
+      processing: false,
+      count: 0,
     }
   }
 
@@ -57,12 +60,14 @@ export default class SrtFileDialogue extends React.Component {
   }
 
   processSubtitles = () => {
+    const toBeProcessed = this.state.subtitles.filter((sub) => sub.checked)
     const details = {
-      subtitles: this.state.subtitles.filter((sub) => sub.checked),
+      subtitles: toBeProcessed,
       videoFileName: this.state.videoFileName,
     }
     const event = new CustomEvent('generate', { detail: details })
     window.dispatchEvent(event)
+    this.setState({ processing: true, count: toBeProcessed.length })
   }
 
   handleFileSelect = (e) => {
@@ -176,6 +181,10 @@ export default class SrtFileDialogue extends React.Component {
     )
   }
 
+  renderProcessing = () => {
+    return <ProgressBar max={this.state.count} />
+  }
+
   renderError = () => {
     return (
       <Message color="danger" m={6}>
@@ -189,6 +198,10 @@ export default class SrtFileDialogue extends React.Component {
   }
 
   render() {
+    if (this.state.processing) {
+      return this.renderProcessing()
+    }
+
     if (this.state.subtitlesLoaded) {
       return this.renderSubtitles()
     }
