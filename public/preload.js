@@ -1,4 +1,4 @@
-const { exec } = require('child_process')
+const { execSync } = require('child_process')
 //const fs = require('fs');
 const pathToFfmpeg = require('ffmpeg-static')
 
@@ -6,7 +6,6 @@ window.addEventListener('generate', (e) => {
   const videoFile = e.detail.videoFileName
   const subtitles = e.detail.subtitles
   const ffmpeg = pathToFfmpeg
-  console.log(e)
 
   //if (!fs.existsSync('gif')) fs.mkdir('temp')
 
@@ -14,21 +13,22 @@ window.addEventListener('generate', (e) => {
 $ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -filter_complex "[0:v] palettegen" palette.png
 $ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -i palette.png -filter_complex "[0:v][1:v] paletteuse" prettyStickAround.gif
 */
-
   for (const sub of subtitles) {
     let startTime = sub.startTime.replace(',', '.')
     let endTime = sub.endTime.replace(',', '.')
     let durationTime = getDurationString(startTime, endTime)
 
-    let fileName = 'test'
+    let fileName = `test${sub.id}` // TODO: calculate filename from subtitle from sub.text
     generatePalette(ffmpeg, startTime, durationTime, videoFile)
     generateGif(ffmpeg, startTime, durationTime, videoFile, fileName)
   }
+
+  console.log('ALL DONE!!!')
 })
 
 function generatePalette(ffmpeg, startTime, durationTime, videoFile) {
-  exec(
-    `${ffmpeg} -ss ${startTime} -t ${durationTime} -i ${videoFile} -filter_complex "[0:v] palettegen" palette.png`,
+  execSync(
+    `${ffmpeg} -y -ss ${startTime} -t ${durationTime} -i ${videoFile} -filter_complex "[0:v] palettegen" palette.png`,
     (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`)
@@ -44,8 +44,8 @@ function generatePalette(ffmpeg, startTime, durationTime, videoFile) {
 }
 
 function generateGif(ffmpeg, startTime, durationTime, videoFile, fileName) {
-  exec(
-    `${ffmpeg} -ss ${startTime} -t ${durationTime} -i ${videoFile} -i palette.png -filter_complex "[0:v][1:v] paletteuse" ${fileName}.gif`,
+  execSync(
+    `${ffmpeg} -y -ss ${startTime} -t ${durationTime} -i ${videoFile} -i palette.png -filter_complex "[0:v][1:v] paletteuse" ${fileName}.gif`,
     (error, stdout, stderr) => {
       if (error) {
         console.log(`error: ${error.message}`)

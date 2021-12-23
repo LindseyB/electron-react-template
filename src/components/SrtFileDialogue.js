@@ -8,7 +8,6 @@ import VideoFileDialogue from './VideoFileDialogue'
 
 import 'bulma/css/bulma.min.css'
 import '../styles/SrtFileDialogue.scss'
-import ProgressBar from './ProgressBar'
 
 export default class SrtFileDialogue extends React.Component {
   constructor(props) {
@@ -28,7 +27,11 @@ export default class SrtFileDialogue extends React.Component {
   }
 
   componentDidUpdate() {
-    this.fileSelector = this.buildFileSelector()
+    if (this.state.processing) {
+      setTimeout(this.processSubtitles, 500)
+    } else {
+      this.fileSelector = this.buildFileSelector()
+    }
   }
 
   buildFileSelector = () => {
@@ -59,6 +62,10 @@ export default class SrtFileDialogue extends React.Component {
     })
   }
 
+  callProcessSubtitles = () => {
+    this.setState({ processing: true })
+  }
+
   processSubtitles = () => {
     const toBeProcessed = this.state.subtitles.filter((sub) => sub.checked)
     const details = {
@@ -67,7 +74,6 @@ export default class SrtFileDialogue extends React.Component {
     }
     const event = new CustomEvent('generate', { detail: details })
     window.dispatchEvent(event)
-    this.setState({ processing: true, count: toBeProcessed.length })
   }
 
   handleFileSelect = (e) => {
@@ -162,7 +168,7 @@ export default class SrtFileDialogue extends React.Component {
             </Button>
             <Button
               outlined
-              onClick={() => this.processSubtitles()}
+              onClick={() => this.callProcessSubtitles()}
               disabled={this.state.videoFileName === null}
             >
               Process All
@@ -181,8 +187,18 @@ export default class SrtFileDialogue extends React.Component {
     )
   }
 
-  renderProcessing = () => {
-    return <ProgressBar max={this.state.count} />
+  renderProcessing() {
+    console.log('rendering')
+    return (
+      <>
+        <div className="lds-ring">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      </>
+    )
   }
 
   renderError = () => {
