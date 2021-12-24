@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import srtParser2 from 'srt-parser-2'
 import { Button, Message, Panel } from 'react-bulma-components'
 
@@ -74,6 +75,7 @@ export default class SrtFileDialogue extends React.Component {
     }
     const event = new CustomEvent('generate', { detail: details })
     window.dispatchEvent(event)
+    this.props.onDoneProcessing()
   }
 
   handleFileSelect = (e) => {
@@ -188,7 +190,6 @@ export default class SrtFileDialogue extends React.Component {
   }
 
   renderProcessing() {
-    console.log('rendering')
     return (
       <>
         <div className="lds-ring">
@@ -228,4 +229,8 @@ export default class SrtFileDialogue extends React.Component {
 
     return this.renderFileSelect()
   }
+}
+
+SrtFileDialogue.propTypes = {
+  onDoneProcessing: PropTypes.func,
 }
