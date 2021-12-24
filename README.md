@@ -37,6 +37,14 @@ Runs prettier to check files.
 
 Runs prettier to check and automatically format files.
 
+### `npm run clean`
+
+Cleans up processed and processing files:
+
+- palette.png
+- gifs folder
+- \*.gif
+
 ### `npm run build`
 
 Builds the app for production to the `build` folder.\

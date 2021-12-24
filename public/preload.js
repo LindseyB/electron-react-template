@@ -6,6 +6,7 @@ window.addEventListener('generate', (e) => {
   const videoFile = e.detail.videoFileName
   const subtitles = e.detail.subtitles
   const ffmpeg = pathToFfmpeg
+  const gifDir = 'gifs'
 
   const kebabCase = (str) =>
     str
@@ -17,8 +18,12 @@ window.addEventListener('generate', (e) => {
   const removeHtml = (str) => str.replace(/<[^>]*>?/gm, '')
   const padIndex = (idx) => idx.toString().padStart(5, '0')
 
-  if (!fs.existsSync('gif')) {
-    fs.mkdir('gif', () => {})
+  if (!fs.existsSync(gifDir)) {
+    fs.mkdir(gifDir, (err) => {
+      if (err) {
+        console.log(err)
+      }
+    })
   }
 
   for (const sub of subtitles) {
@@ -26,7 +31,7 @@ window.addEventListener('generate', (e) => {
     let endTime = sub.endTime.replace(',', '.')
     let durationTime = getDurationString(startTime, endTime)
 
-    let fileName = `gif/${padIndex(sub.id)}-${kebabCase(removeHtml(sub.text))}`
+    let fileName = `${gifDir}/${padIndex(sub.id)}-${kebabCase(removeHtml(sub.text))}`
     generatePalette(ffmpeg, startTime, durationTime, videoFile)
     generateGif(ffmpeg, startTime, durationTime, videoFile, fileName)
   }

@@ -32,7 +32,8 @@
     "lint:fix": "eslint --fix ./src ./public",
     "format": "prettier --check ./src ./public",
     "format:fix": "prettier --write ./src ./public",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "clean": "rm -rf gifs *.gif palette.png"
   },
   "eslintConfig": {
     "extends": [
