@@ -1,5 +1,5 @@
 const { execSync } = require('child_process')
-//const fs = require('fs');
+const fs = require('fs')
 const pathToFfmpeg = require('ffmpeg-static')
 
 window.addEventListener('generate', (e) => {
@@ -17,14 +17,16 @@ window.addEventListener('generate', (e) => {
   const removeHtml = (str) => str.replace(/<[^>]*>?/gm, '')
   const padIndex = (idx) => idx.toString().padStart(5, '0')
 
-  //if (!fs.existsSync('gif')) fs.mkdir('temp')
+  if (!fs.existsSync('gif')) {
+    fs.mkdir('gif', () => {})
+  }
 
   for (const sub of subtitles) {
     let startTime = sub.startTime.replace(',', '.')
     let endTime = sub.endTime.replace(',', '.')
     let durationTime = getDurationString(startTime, endTime)
 
-    let fileName = `${padIndex(sub.id)}-${kebabCase(removeHtml(sub.text))}`
+    let fileName = `gif/${padIndex(sub.id)}-${kebabCase(removeHtml(sub.text))}`
     generatePalette(ffmpeg, startTime, durationTime, videoFile)
     generateGif(ffmpeg, startTime, durationTime, videoFile, fileName)
   }
