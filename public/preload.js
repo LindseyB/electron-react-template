@@ -7,23 +7,27 @@ window.addEventListener('generate', (e) => {
   const subtitles = e.detail.subtitles
   const ffmpeg = pathToFfmpeg
 
+  const kebabCase = (str) =>
+    str
+      .match(/[A-Z]{2,}(?=[A-Z][a-z0-9]*|\b)|[A-Z]?[a-z0-9]*|[A-Z]|[0-9]+/g)
+      .filter(Boolean)
+      .map((x) => x.toLowerCase())
+      .join('-')
+
+  const removeHtml = (str) => str.replace(/<[^>]*>?/gm, '')
+  const padIndex = (idx) => idx.toString().padStart(5, '0')
+
   //if (!fs.existsSync('gif')) fs.mkdir('temp')
 
-  /* How to generate and use a palette for ffmpeg
-$ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -filter_complex "[0:v] palettegen" palette.png
-$ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -i palette.png -filter_complex "[0:v][1:v] paletteuse" prettyStickAround.gif
-*/
   for (const sub of subtitles) {
     let startTime = sub.startTime.replace(',', '.')
     let endTime = sub.endTime.replace(',', '.')
     let durationTime = getDurationString(startTime, endTime)
 
-    let fileName = `test${sub.id}` // TODO: calculate filename from subtitle from sub.text
+    let fileName = `${padIndex(sub.id)}-${kebabCase(removeHtml(sub.text))}`
     generatePalette(ffmpeg, startTime, durationTime, videoFile)
     generateGif(ffmpeg, startTime, durationTime, videoFile, fileName)
   }
-
-  console.log('ALL DONE!!!')
 })
 
 function generatePalette(ffmpeg, startTime, durationTime, videoFile) {
