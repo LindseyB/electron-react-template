@@ -11,6 +11,9 @@
 # production
 /build
 
+# electron forge output
+/out
+
 # misc
 .DS_Store
 .env.local
@@ -24,3 +27,5 @@ yarn-error.log*
 
 *.gif
 palette.png
+
+
