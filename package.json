@@ -9,8 +9,10 @@
     "make": "electron-forge make",
     "build": "./node_modules/.bin/webpack",
     "build:watch": "./node_modules/.bin/webpack-dev-server --hot --inline",
-    "lint": "eslint \"src/*.js\"", 
-    "lint:fix": "eslint --fix \"src/*.js\""
+    "lint": "eslint \"src/*.js\"",
+    "lint:fix": "eslint --fix \"src/*.js\"",
+    "format": "prettier --check .",
+    "format:fix": "prettier --write ."
   },
   "repository": "https://github.com/LindseyB/sturdy-engine",
   "keywords": [
@@ -29,6 +31,7 @@
     "electron": "^16.0.5",
     "eslint": "^8.5.0",
     "eslint-plugin-react": "^7.28.0",
+    "prettier": "2.5.1",
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
     "ts-loader": "^9.2.6",

@@ -10,7 +10,7 @@ Build the application for distribution
 
 ### `npm run build`
 
-Build the webpack 
+Build the webpack
 
 ### `npm run build:watch`
 
