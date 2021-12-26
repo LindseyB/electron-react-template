@@ -1,14 +1,14 @@
 {
-  "name": "electron-quick-start",
+  "name": "sturdy-engine",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "An electron app for generating gifs",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/LindseyB/sturdy-engine",
   "keywords": [
     "Electron",
     "quick",
@@ -16,7 +16,7 @@
     "tutorial",
     "demo"
   ],
-  "author": "GitHub",
+  "author": "LindseyB",
   "license": "CC0-1.0",
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.61",
