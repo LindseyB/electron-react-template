@@ -12,12 +12,17 @@
     "lint": "eslint \"src/*.js\"",
     "lint:fix": "eslint --fix \"src/*.js\"",
     "format": "prettier --check .",
-    "format:fix": "prettier --write ."
+    "format:fix": "prettier --write .",
+    "prepare": "husky install"
   },
   "repository": "https://github.com/LindseyB/sturdy-engine",
   "keywords": [
     "gif"
   ],
+  "lint-staged": {
+    "*.js": "eslint --fix src/*.js",
+    "**/*": "prettier --write --ignore-unknown"
+  },
   "author": "LindseyB",
   "license": "CC0-1.0",
   "devDependencies": {
@@ -31,6 +36,8 @@
     "electron": "^16.0.5",
     "eslint": "^8.5.0",
     "eslint-plugin-react": "^7.28.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.1.4",
     "prettier": "2.5.1",
     "sass": "^1.45.1",
     "sass-loader": "^12.4.0",
