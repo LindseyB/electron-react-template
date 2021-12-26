@@ -4,6 +4,10 @@
 
 Run the application
 
+### `npm run dev`
+
+Starts the application with webpack in watchmode
+
 ### `npm run make`
 
 Build the application for distribution

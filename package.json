@@ -5,6 +5,7 @@
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
+    "start:dev": "ENVIRONMENT=dev electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
     "build": "./node_modules/.bin/webpack",
@@ -14,7 +15,7 @@
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
     "prepare": "husky install",
-    "dev": "concurrently \"npm start\" \"npm run build:watch\""
+    "dev": "concurrently \"npm run start:dev\" \"npm run build:watch\""
   },
   "repository": "https://github.com/LindseyB/sturdy-engine",
   "keywords": [

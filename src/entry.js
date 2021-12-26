@@ -5,11 +5,7 @@ import ReactDOM from "react-dom";
 
 export default class App extends React.Component {
   render() {
-    return (
-      <div className="notification is-primary my-4" id="an-change">
-        Hello, React.
-      </div>
-    );
+    return <div className="notification is-primary my-4">Hello, React.</div>;
   }
 }
 

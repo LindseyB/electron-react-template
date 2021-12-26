@@ -28,6 +28,19 @@
       crossorigin
       src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"
     ></script>
-    <script src="build/bundle.js"></script>
+    <script>
+      // set the bundle path based on how we are running
+      var bundlePath = "./build/bundle.js";
+      if (typeof process !== "undefined" && process.env.ENVIRONMENT === "dev") {
+        bundlePath = "http://localhost:8080/build/bundle.js";
+      }
+
+      var bundleScriptEl = document.createElement("script");
+      bundleScriptEl.src = bundlePath;
+      document.currentScript.parentNode.insertBefore(
+        bundleScriptEl,
+        document.currentScript
+      );
+    </script>
   </body>
 </html>
