@@ -6,15 +6,12 @@
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
-    "make": "electron-forge make"
+    "make": "electron-forge make",
+    "sass": "node-sass -w scss -o css/main.css"
   },
   "repository": "https://github.com/LindseyB/sturdy-engine",
   "keywords": [
-    "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "gif"
   ],
   "author": "LindseyB",
   "license": "CC0-1.0",
@@ -27,7 +24,9 @@
     "electron": "^16.0.5"
   },
   "dependencies": {
-    "electron-squirrel-startup": "^1.0.0"
+    "bulma": "^0.9.3",
+    "electron-squirrel-startup": "^1.0.0",
+    "node-sass": "^7.0.0"
   },
   "config": {
     "forge": {
