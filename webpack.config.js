@@ -1,4 +1,3 @@
-var webpack = require("webpack");
 var path = require("path");
 
 module.exports = {
@@ -14,7 +13,16 @@ module.exports = {
 
   module: {
     rules: [
-      { test: /\.js$/, use: "babel-loader", exclude: /node_modules/ },
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
+      },
       {
         test: /\.s[ac]ss$/i,
         use: [

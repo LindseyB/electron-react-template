@@ -8,12 +8,13 @@
     "package": "electron-forge package",
     "make": "electron-forge make",
     "build": "./node_modules/.bin/webpack",
-    "build:watch": "./node_modules/.bin/webpack-dev-server --hot --inline",
+    "build:watch": "./node_modules/.bin/webpack-dev-server --hot",
     "lint": "eslint \"src/*.js\"",
     "lint:fix": "eslint --fix \"src/*.js\"",
     "format": "prettier --check .",
     "format:fix": "prettier --write .",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "dev": "concurrently \"npm start\" \"npm run build:watch\""
   },
   "repository": "https://github.com/LindseyB/sturdy-engine",
   "keywords": [
@@ -26,6 +27,8 @@
   "author": "LindseyB",
   "license": "CC0-1.0",
   "devDependencies": {
+    "@babel/preset-env": "^7.16.5",
+    "@babel/preset-react": "^7.16.5",
     "@electron-forge/cli": "^6.0.0-beta.61",
     "@electron-forge/maker-deb": "^6.0.0-beta.61",
     "@electron-forge/maker-rpm": "^6.0.0-beta.61",
@@ -33,6 +36,7 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "concurrently": "^6.5.1",
     "electron": "^16.0.5",
     "eslint": "^8.5.0",
     "eslint-plugin-react": "^7.28.0",
@@ -43,7 +47,8 @@
     "sass-loader": "^12.4.0",
     "ts-loader": "^9.2.6",
     "webpack": "^5.65.0",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.7.1"
   },
   "dependencies": {
     "babel-loader": "^8.2.3",
