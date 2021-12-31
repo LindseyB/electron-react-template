@@ -4,6 +4,7 @@ module.exports = {
   context: path.join(__dirname, "/src"),
   entry: "./entry.js",
   mode: "development",
+  target: "electron-renderer",
 
   output: {
     filename: "bundle.js",
