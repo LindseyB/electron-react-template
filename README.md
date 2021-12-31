@@ -15,6 +15,7 @@ Based off of [electron quick start](https://github.com/electron/electron-quick-s
 - [Prettier](https://prettier.io/)
 - A github action for automatically checking branches with eslint and prettier
 - [Husky](https://typicode.github.io/husky/) for adding an automatic post commit hook to lint and format code
+- [Dependabot](https://docs.github.com/en/code-security/supply-chain-security/keeping-your-dependencies-updated-automatically/configuration-options-for-dependency-updates)
 
 ## Quick start
 
