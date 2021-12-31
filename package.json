@@ -1,7 +1,7 @@
 {
-  "name": "sturdy-engine",
+  "name": "electron-react-template",
   "version": "1.0.0",
-  "description": "An electron app for generating gifs",
+  "description": "A template for an electron app using react",
   "main": "main.js",
   "scripts": {
     "start": "electron-forge start",
@@ -17,10 +17,7 @@
     "prepare": "husky install",
     "dev": "concurrently \"npm run start:dev\" \"npm run build:watch\""
   },
-  "repository": "https://github.com/LindseyB/sturdy-engine",
-  "keywords": [
-    "gif"
-  ],
+  "repository": "https://github.com/LindseyB/electron-react-template",
   "lint-staged": {
     "*.js": "eslint --fix src/*.js",
     "**/*": "prettier --write --ignore-unknown"
