@@ -16,6 +16,15 @@ Based off of [electron quick start](https://github.com/electron/electron-quick-s
 - A github action for automatically checking branches with eslint and prettier
 - [Husky](https://typicode.github.io/husky/) for adding an automatic post commit hook to lint and format code
 
+## Quick start
+
+```bash
+git clone git@github.com:LindseyB/electron-react-template.git
+cd electron-react-template
+npm install
+npm run dev
+```
+
 ## Scripts
 
 ### `npm start`
