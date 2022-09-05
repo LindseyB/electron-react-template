@@ -38,7 +38,7 @@
     "cross-env": "^7.0.3",
     "electron": "^20.1.0",
     "eslint": "^8.23.0",
-    "eslint-plugin-react": "^7.31.1",
+    "eslint-plugin-react": "^7.31.6",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "2.7.1",
