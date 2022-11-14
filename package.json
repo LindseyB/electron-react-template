@@ -52,7 +52,7 @@
   "dependencies": {
     "babel-loader": "^9.1.0",
     "bulma": "^0.9.4",
-    "css-loader": "^6.7.1",
+    "css-loader": "^6.7.2",
     "electron-squirrel-startup": "^1.0.0",
     "node-sass": "^8.0.0",
     "react": "^18.2.0",
