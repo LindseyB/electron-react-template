@@ -36,7 +36,7 @@
     "@types/react-dom": "^18.0.11",
     "concurrently": "^8.0.1",
     "cross-env": "^7.0.3",
-    "electron": "^23.2.1",
+    "electron": "^24.0.0",
     "eslint": "^8.37.0",
     "eslint-plugin-react": "^7.32.2",
     "husky": "^8.0.3",
