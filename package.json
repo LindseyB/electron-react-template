@@ -37,7 +37,7 @@
     "concurrently": "^8.2.2",
     "cross-env": "^7.0.3",
     "electron": "^27.0.2",
-    "eslint": "^8.51.0",
+    "eslint": "^8.52.0",
     "eslint-plugin-react": "^7.33.2",
     "husky": "^8.0.3",
     "lint-staged": "^15.0.2",
