@@ -31,7 +31,7 @@
     "@electron-forge/maker-deb": "^7.3.0",
     "@electron-forge/maker-rpm": "^7.3.0",
     "@electron-forge/maker-squirrel": "^7.3.0",
-    "@electron-forge/maker-zip": "^7.3.0",
+    "@electron-forge/maker-zip": "^7.3.1",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "concurrently": "^8.2.2",
