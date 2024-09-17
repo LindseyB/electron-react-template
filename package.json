@@ -50,7 +50,7 @@
     "webpack-dev-server": "^5.1.0"
   },
   "dependencies": {
-    "babel-loader": "^9.2.0",
+    "babel-loader": "^9.2.1",
     "bulma": "^1.0.2",
     "css-loader": "^7.1.2",
     "electron-squirrel-startup": "^1.0.1",
