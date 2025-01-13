@@ -33,7 +33,7 @@
     "@electron-forge/maker-squirrel": "^7.6.0",
     "@electron-forge/maker-zip": "^7.6.0",
     "@types/react": "^19.0.6",
-    "@types/react-dom": "^19.0.2",
+    "@types/react-dom": "^19.0.3",
     "concurrently": "^9.1.2",
     "cross-env": "^7.0.3",
     "electron": "^33.3.1",
