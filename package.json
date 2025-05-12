@@ -29,7 +29,7 @@
     "@babel/preset-react": "^7.27.1",
     "@electron-forge/cli": "^7.8.1",
     "@electron-forge/maker-deb": "^7.8.1",
-    "@electron-forge/maker-rpm": "^7.8.0",
+    "@electron-forge/maker-rpm": "^7.8.1",
     "@electron-forge/maker-squirrel": "^7.8.1",
     "@electron-forge/maker-zip": "^7.8.1",
     "@types/react": "^19.1.3",
