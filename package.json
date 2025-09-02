@@ -44,7 +44,7 @@
     "prettier": "3.6.2",
     "sass": "^1.91.0",
     "sass-loader": "^16.0.5",
-    "ts-loader": "^9.5.2",
+    "ts-loader": "^9.5.4",
     "webpack": "^5.101.3",
     "webpack-cli": "^6.0.1",
     "webpack-dev-server": "^5.2.2"
