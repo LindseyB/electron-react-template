@@ -42,7 +42,7 @@
     "husky": "^9.1.7",
     "lint-staged": "^16.1.6",
     "prettier": "3.6.2",
-    "sass": "^1.92.1",
+    "sass": "^1.93.0",
     "sass-loader": "^16.0.5",
     "ts-loader": "^9.5.4",
     "webpack": "^5.101.3",
